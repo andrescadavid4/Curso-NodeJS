@@ -1,0 +1,15 @@
+{
+  "name": "fundametos",
+  "version": "1.0.1",
+  "description": "primer trabajo",
+  "main": "archivo.js",
+  "dependencies": {
+    "yargs": "^13.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andres Maya",
+  "license": "ISC"
+}

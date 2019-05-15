@@ -4,7 +4,7 @@
   "description": "primer trabajo",
   "main": "archivo.js",
   "dependencies": {
-    "yargs": "^13.2.2"
+    "yargs": "^13.2.4"
   },
   "devDependencies": {},
   "scripts": {

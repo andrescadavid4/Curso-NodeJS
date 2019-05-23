@@ -1,4 +1,6 @@
 //Require Externo (yargs): En este último ejemplo de Require vamos a instalar y trabajar con yargs, el cual se descarga desde el NPM y permite ingresar comandos por teclado desde la consola.
+const express = require('express')
+const app = express()
 const alumno = {
     id:{
         demand: true,
@@ -45,7 +47,10 @@ if (idmateria){
     console.log('Alumno inscrito de manera satisfactoria');
      const fs = require ('fs');
 
-    let crearArchivo = (idmateria)=>{
+    texto = 'el nombre del estudiante es ' + argv.nombre + '\n' +
+                'con cedula ' + argv.cedula + '\n' +
+                'El id del curso es ' + idmateria.id + ' con el nombre ' + idmateria.nombre + ' que tiene una diración de ' + idmateria.duracion + ' Horas, con un valor de ' + idmateria.valor + ' pesos' ;
+    /* let crearArchivo = (idmateria)=>{
         texto = 'el nombre del estudiante es ' + argv.nombre + '\n' +
                 'con cedula ' + argv.cedula + '\n' +
                 'El id del curso es ' + idmateria.id + ' con el nombre ' + idmateria.nombre + ' que tiene una diración de ' + idmateria.duracion + ' Horas, con un valor de ' + idmateria.valor + ' pesos' ;
@@ -53,9 +58,9 @@ if (idmateria){
             if(err) throw(err);
             console.log('se ha creado el archivo')
         });
-    }
+    } */
 
-    crearArchivo(idmateria); 
+    //crearArchivo(idmateria); 
 
 }else if (!idmateria && argv.id != undefined) {
     console.log('el id ingresado no existe');
@@ -85,3 +90,11 @@ if (idmateria){
 }
 
 
+
+ 
+//app.use(express.static(__dirname + '/public'))
+app.get('/', function (req, res) {
+  res.send(texto)
+})
+ 
+app.listen(3000)

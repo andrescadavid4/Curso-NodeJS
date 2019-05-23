@@ -4,6 +4,7 @@
   "description": "primer trabajo",
   "main": "archivo.js",
   "dependencies": {
+    "express": "^4.17.0",
     "yargs": "^13.2.4"
   },
   "devDependencies": {},

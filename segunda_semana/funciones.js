@@ -91,10 +91,38 @@ const mostrarpromest = (nom) =>{
     }
 }
 
+const actualizar = (nom, asignatura, calificacion) =>{
+    listar()
+    let est = listaEstudiantes.find(buscar => buscar.nombre == nom)
+    if(!est){
+        console.log('Estudiante no existe')
+    }
+    else{
+        est[asignatura] = calificacion;
+        guardar()
+    }
+}
+
+const eliminar = (nom) =>{
+    listar()
+    let nuevo = listaEstudiantes.filter(mat => mat.nombre != nom);
+    if (nuevo.length == listaEstudiantes.length){
+        console.log('ningun estudiante tiene el nombre indicado')
+    }
+    else{
+        listaEstudiantes = nuevo
+        guardar()
+    }
+
+}
+
+
 module.exports = {
     crear,
     mostrar,
     mostrarest,
     mostrarmat,
-    mostrarpromest
+    mostrarpromest,
+    actualizar,
+    eliminar
 }

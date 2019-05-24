@@ -54,6 +54,8 @@ const argv= require ('yargs')
             .command('mostrar', 'Muestra los estudiantes y sus notas')
             .command('mostrarest', 'Muestra la información del estudiante', mostrarest)
             .command('mostrarpromest', 'Muestra el promedio de un estudiante', mostrarpromest)
+            .command('actualizar', 'Actualiza la información del curso', actualiza)
+            .command('eliminar', 'Elimina un estudiante por el nombre', elimina)
             .argv;
 
 module.exports = {

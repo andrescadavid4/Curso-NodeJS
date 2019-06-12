@@ -1,5 +1,6 @@
 const fs = require ('fs');
 listaEstudiantes = [];
+listaCursos = [];
 
 const crear = (estudiante) => {
     listar();
@@ -19,6 +20,27 @@ const crear = (estudiante) => {
         console.log('Ya existe otro estudiante con ese nombre')
 }
 
+const crearCurso = (curso)=> {
+    listarCursos();
+    let curso = {
+        id: curso.id,
+        nombre: curso.nombre,
+        descripcion: curso.descripcion,
+        valor: curso.valor,
+        modalidad: curso.modalidad,
+        intensidad: curso.intensidad,
+        estado: curso.estado
+    };
+    let duplicado = listaEstudiantes.find(nom => nom.id == curso.id)
+    if(!duplicado){
+        listaCursos.push(curso);
+    console.log(listaCursos);
+    guardarcurso();
+    }
+    else
+        existe= 'Ya exite un curso con ese id'
+}
+
 const listar = () => {
     try{
     listaEstudiantes = require('./listado.json'); // para usar de manera no asincronica
@@ -28,9 +50,26 @@ const listar = () => {
     }
 }
 
+const listarCursos = () => {
+    try{
+        listaCursos = require('./cursos.json'); // para usar de manera no asincronica
+    //listaEstudiantes = JSON.parse(fs.readFileSync('listado.js')); //para usar de manera asincronica
+    } catch(error){
+        listaCursos = [];
+    }
+}
+
 const guardar = () => {
     let datos = JSON.stringify(listaEstudiantes);
     fs.writeFile('listado.json', datos,(err)=>{
+        if(err) throw(err);
+        console.log('Archivo creado con éxito');
+    })
+}
+
+const guardarcurso = () => {
+    let datos = JSON.stringify(listaCursos);
+    fs.writeFile('cursos.json', datos,(err)=>{
         if(err) throw(err);
         console.log('Archivo creado con éxito');
     })
@@ -124,5 +163,6 @@ module.exports = {
     mostrarmat,
     mostrarpromest,
     actualizar,
-    eliminar
+    eliminar,
+    crearCurso
 }

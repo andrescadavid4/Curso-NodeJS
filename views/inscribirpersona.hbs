@@ -1,0 +1,42 @@
+{{>header}}
+
+        
+<p>
+<form action="/inscritopersona" method="post">
+    <div class="container">
+        <h3>
+            Inscripción de estudiantes<br><br>
+        </h3>
+        <div class="row">
+            <div class="col">
+                <label>Documento de Identidad</label>
+                <input type="number" class="form-control" name="documento" placeholder="Ingrese Documento" required><br>
+            </div>
+            <div class="col">
+                <label>Nombre</label>
+                <input type="text" class="form-control" name="nombre" placeholder="Ingrese Nombre" required><br>
+            </div>
+            <div class="col">
+                <label>Correo</label>
+                <input type="text" class="form-control" name="correo" placeholder="Ingrese correo" required><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Telefono</label>
+                <input type="number" class="form-control" name="telefono" placeholder="Descripción" required></textarea>
+            </div>
+            <div class="col">
+                <label>Seleccione Curso</label>
+                <select name="curso" class="form-control">
+                {{{drocombos}}}
+                </select>
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-primary">Enviar</button>
+        <br>
+    </div>
+</form>
+        </p>
+{{>footer}}

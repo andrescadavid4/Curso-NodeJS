@@ -62,6 +62,16 @@ hbs.registerHelper('listar2', () =>{
     return texto;
 });
 
+hbs.registerHelper('drocombos',() =>{
+    listaCursos = require('./cursos.json')
+    let texto = '<option value="virtual">';
+    listaCursos.forEach(cursos => {
+        texto = texto + cursos.nombre; 
+    })
+    texto = texto + '</option>';
+    console.log("texto: ",texto)
+    return texto;
+});
 //Guardar Curso//////////////////////////////
 hbs.registerHelper(listarcurso = () => {
     try{

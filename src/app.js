@@ -65,6 +65,10 @@ app.post('/inscrito', (req,res) =>{
 
 });
 
+app.get('/inscribirpersona',(req,res) =>{
+    res.render('inscribirpersona');
+});
+
 app.post('/calculos',(req,res) =>{
 
     res.render('calculos',{
@@ -81,6 +85,8 @@ app.get('*',(req,res) =>{
     });
     
 })
+
+
 
 
 console.log(__dirname)

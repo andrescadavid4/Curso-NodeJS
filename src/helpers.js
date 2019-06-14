@@ -62,16 +62,7 @@ hbs.registerHelper('listar2', () =>{
     return texto;
 });
 
-hbs.registerHelper('drocombos',() =>{
-    listaCursos = require('./cursos.json')
-    let texto = '<option value="virtual">';
-    listaCursos.forEach(cursos => {
-        texto = texto + cursos.nombre; 
-    })
-    texto = texto + '</option>';
-    console.log("texto: ",texto)
-    return texto;
-});
+
 //Guardar Curso//////////////////////////////
 hbs.registerHelper(listarcurso = () => {
     try{
@@ -108,10 +99,99 @@ hbs.registerHelper(crearcurso = (curso) => {
     }; */
 });
 
-
 hbs.registerHelper(guardarcurso = () => {
     let cursos = JSON.stringify(listaCursos);
     fs.writeFile("./src/cursos.json", cursos, (err) =>{
+        if(err) throw (err);
+    });
+});
+
+//// Combo para llenar los Cursos //////////////////
+hbs.registerHelper('drocombos',() =>{
+    listaCursos = require('./cursos.json')
+    let texto = "<div class='col'> \
+                <label>Seleccione Curso</label> \
+                <select name='curso' class='form-control'>\
+                <option value='-'>-</option>";
+    listaCursos.forEach(cursos => {
+        texto = texto + 
+        `<option value="${cursos.nombre}">${cursos.nombre}</option>'`; 
+    })
+    texto = texto + '</select></div>';
+    return texto;
+});
+
+///Guardar Persona Curso////////////////////////
+hbs.registerHelper(listarpersonacurso = () => {
+    try{
+      listapersonaCursos = require ("./personacursos.json");
+  } catch (error) {
+    listapersonaCursos = [];
+  }
+  });
+
+hbs.registerHelper(crearpersonacurso = (curso) => {
+    listarpersonacurso()
+    let nuevopersonacurso = {
+        documento: curso.documento,
+        nombre: curso.nombre,
+        correo: curso.correo,
+        telefono: curso.telefono,
+        curso: curso.curso
+    };
+    
+   /*  let duplicado = listaCursos.find(x => x.id == curso.id)
+    console.log("duplicado", duplicado);
+    if(!duplicado){ */
+        listapersonaCursos.push(nuevopersonacurso);
+        guardarpersonacurso();
+      /*   let diferente = true;
+        console.log("diferente hepler", diferente);
+            return diferente;
+    }else{
+        let diferente = false;
+        console.log("diferente hepler", diferente);
+            return diferente;
+    }; */
+});
+
+////// Listar persona curso/////////////////////////
+hbs.registerHelper('cursopersona', () =>{
+    listaCursos = require('./personacursos.json')
+    let texto = "<div class='accordion' id='accordionExample'>";
+    i = 1;
+    listaCursos.forEach(cursos => {
+        texto = texto +
+                `<div class="card">
+                    <div class="card-header" id="heading${i}>
+                        <h2 class="mb-0">
+                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
+                                ${cursos.curso}
+                            </button><br>
+                        </h2>
+                    </div>
+                    
+                        <div id="collapse${i}" class="collapse" aria-labelledby="heading${i}" data-parent="#accordionExample">
+                            <div class="card-body">
+                                Documeto: ${cursos.documento} <br>
+                                Nombre: ${cursos.nombre} <br>
+                                Correo: ${cursos.correo} <br>
+                                Teléfono: ${cursos.telefono} <br>
+                            </div>
+                        </div>
+                </div>`
+                i = i + 1;
+    })
+    texto = texto + '</div>';
+    return texto;
+});
+
+
+
+
+hbs.registerHelper(guardarpersonacurso = () => {
+    let personacursos = JSON.stringify(listapersonaCursos);
+    fs.writeFile("./src/personacursos.json", personacursos, (err) =>{
         if(err) throw (err);
     });
 });

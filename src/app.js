@@ -19,6 +19,7 @@ app.use(express.static(directoriopublico));
 hbs.registerPartials(directoriopartials);
 app.use(bodyParser.urlencoded({extended: false}));
 
+
 app.set('view engine', 'hbs');
 
 app.get('/',(req,res) =>{
@@ -30,6 +31,10 @@ app.get('/',(req,res) =>{
 
 app.get('/listacursos',(req,res) =>{
     res.render('listacursos');
+});
+
+app.get('/listapersonacurso',(req,res) =>{
+    res.render('listapersonacurso');
 });
 
 app.get('/inscribir',(req,res) =>{
@@ -68,6 +73,35 @@ app.post('/inscrito', (req,res) =>{
 
 app.get('/inscribirpersona',(req,res) =>{
     res.render('inscribirpersona');
+});
+
+//Metodo para Guardar personas con curso
+app.post('/inscritopersona', (req,res) =>{
+    let nuevoperonaCurso = {
+        documento: parseInt(req.body.documento),
+        nombre: req.body.nombre,
+        correo: req.body.correo,
+        telefono: parseInt(req.body.telefono),
+        curso: req.body.curso
+    }
+    
+    let listapersonaCursos = require('./personacursos.json'); // para usar de manera no asincronica
+
+    let duplicado = listapersonaCursos.find(x => x.documento == nuevoperonaCurso.documento & x.curso == nuevoperonaCurso.curso)
+
+    if(!duplicado){
+        crearpersonacurso(nuevoperonaCurso)
+        res.render("inscritopersona",{
+            titulo: "Verificación inscripción Persona",
+            enunciado: "Persona Inscrita con exito"
+        });
+    }else{
+        res.render("inscritopersona",{
+            titulo: "Verificación Curso Nuevo",
+            enunciado: "Ya existe una persona inscrita con ese documento al curso"
+        })
+    };
+
 });
 
 app.post('/calculos',(req,res) =>{
